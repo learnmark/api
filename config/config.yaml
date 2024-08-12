@@ -1,0 +1,28 @@
+server:
+  http:
+    addr: 0.0.0.0:8080
+    timeout: 1s
+  grpc:
+    addr: 0.0.0.0:9090
+    timeout: 1s
+    interceptors:
+      auth:
+        enabled: true
+        ignoreMethods:
+          - learnmark/GetVersion
+          - learnmark/SignIn
+          - learnmark/RefreshToken
+
+data:
+  database:
+    driver: mysql # mysql and postgres supported
+    host: 127.0.0.1
+    port: 3306
+    database: learnmark
+    user: root
+    password: root
+    max-idle-connections: 150
+    max-open-connections: 150
+    max-connection-lifetime: 20
+    auto-create-admin: true # when true if no username is admin, create one and set as super admin with password admin
+    log-level: 4 # GORM log level, 1: silent, 2:error, 3:warn, 4:info

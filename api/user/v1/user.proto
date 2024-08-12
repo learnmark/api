@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+import "api/general/v1/common.proto";
+
+package learnmark.api.user.v1;
+
+option go_package = "github.com/learnmark/learnmark/api/user/v1";
+
+message User {
+  string id = 1;
+  string name = 2;
+  string email = 3;
+  string password = 4;
+  bool is_super_admin = 5;
+  int64 created_at = 9;
+  int64 updated_at = 10;
+  Token token = 11;
+}
+
+message Token {
+  string access_token = 1;
+  string refresh_token = 2;
+}
+
+message CreateUserReq {
+  string name = 1;
+  string email = 2;
+  string password = 3;
+  bool is_super_admin = 4;
+}
+
+message CreateUserRes {
+  bool success = 1;
+  User item = 2;
+}
+
+message SignInReq {
+  string name = 1;
+  string password = 2;
+}
+
+message SignInRes {
+  User item = 1;
+}
+
+message RefreshTokenReq {
+  string refresh_token = 1;
+}
+
+message RefreshTokenRes {
+  Token item = 1;
+}
